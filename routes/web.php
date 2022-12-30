@@ -13,14 +13,6 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/admin', function () {
-    return view('admin.dashboard');
-})->middleware('admin.auth:admin')->name('admin.dashboard');
-
-Route::get('/admin/dashboard', function () {
-    return view('admin.dashboard');
-})->middleware('admin.auth:admin')->name('admin.dashboard');
-
 Route::get('/home', function () {
     return view('public.welcome');
 })->name('home');
