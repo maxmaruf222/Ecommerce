@@ -65,6 +65,31 @@ Route::prefix('/admin')->name('admin.')->middleware('admin.auth:admin')->group(f
 //admin item route
 Route::prefix('/admin')->name('admin.')->middleware('admin.auth:admin')->group(function(){
         // Route::get('/name', function () { return view('admin.jack'); });
+    Route::get('/', App\Http\Livewire\Admin\Dashboard::class)->name('dashboard');
+    Route::get('profile', App\Http\Livewire\Admin\Profile::class)->name('profile');
 });
+Route::prefix('/admin')->name('category.')->middleware('admin.auth:admin')->group(function(){
+    Route::get('category', App\Http\Livewire\Admin\Category::class)->name('view');
+});
+Route::prefix('/admin')->name('products.')->middleware('admin.auth:admin')->group(function(){
+    Route::get('products', App\Http\Livewire\Admin\Products::class)->name('view');
+});
+Route::prefix('/admin')->name('order.')->middleware('admin.auth:admin')->group(function(){
+    Route::get('order', App\Http\Livewire\Admin\Order::class)->name('view');
+});
+Route::prefix('/admin')->name('wishlist.')->middleware('admin.auth:admin')->group(function(){
+    Route::get('wishlist', App\Http\Livewire\Admin\Wishlist::class)->name('view');
+});
+Route::prefix('/admin')->name('cart.')->middleware('admin.auth:admin')->group(function(){
+    Route::get('cartegory', App\Http\Livewire\Admin\Cart::class)->name('view');
+});
+Route::prefix('/admin')->name('blog.')->middleware('admin.auth:admin')->group(function(){
+    Route::get('blog', App\Http\Livewire\Admin\Blog::class)->name('view');
+});
+Route::prefix('/admin')->name('setting.')->middleware('admin.auth:admin')->group(function(){
+    Route::get('setting', App\Http\Livewire\Admin\Setting::class)->name('view');
+});
+
+
 
 

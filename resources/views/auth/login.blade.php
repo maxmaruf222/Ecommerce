@@ -1,47 +1,92 @@
-<x-guest-layout>
-    <!-- Session Status -->
-    <x-auth-session-status class="mb-4" :status="session('status')" />
-
-    <form method="POST" action="{{ route('login') }}">
-        @csrf
-
-        <!-- Email Address -->
-        <div>
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
-        </div>
-
-        <!-- Password -->
-        <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
-
-            <x-text-input id="password" class="block mt-1 w-full"
-                            type="password"
-                            name="password"
-                            required autocomplete="current-password" />
-
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
-        </div>
-
-        <!-- Remember Me -->
-        <div class="block mt-4">
-            <label for="remember_me" class="inline-flex items-center">
-                <input id="remember_me" type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" name="remember">
-                <span class="ml-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
-            </label>
-        </div>
-
-        <div class="flex items-center justify-end mt-4">
-            @if (Route::has('password.request'))
-                <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('password.request') }}">
-                    {{ __('Forgot your password?') }}
-                </a>
-            @endif
-
-            <x-primary-button class="ml-3">
-                {{ __('Log in') }}
-            </x-primary-button>
-        </div>
-    </form>
-</x-guest-layout>
+    @extends('public.layouts.app')
+    @section('Main')
+                <!-- Start Breadcrumb  -->
+                <div class="breadcrump-area">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-12 col-sm-12">
+                                <div class="bigBajar-breadcrump">
+                                    <ul>
+                                        <li><a href="index.html" title="Go to Home Page">Home</a></li>
+                                        <li>Login</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Start Breadcrumb  -->            
+    
+                <!-- Start Maincontent  -->
+                <section class="main-content-area">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-12 col-sm-12">
+                                <div class="section-title section-title-style1">
+                                    <h2>Customer Login</h2>
+                                </div>  
+                                <div>
+                                    @if ($errors->any())
+                                        <div class="m-4">
+                                            <ul class="alert alert-danger alert-dismissible fade show">
+                                                <h4 class="alert-heading"><i class="bi-exclamation-octagon-fill"></i> Oops! Something went wrong.</h4>
+                                                @foreach ($errors->all() as $error)
+                                                    <li>{{ $error }}</li>
+                                                @endforeach
+                                            </ul>
+                                        </div>
+                                    @endif
+                                </div>          				
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12 col-md-6">
+                                <div class="customer-area contact-us-area">	
+                                    <h3>Registered Customers</h3>
+                                    @if (Route::is('login'))
+                                        @if (session('status'))
+                                            {{ session('status') }}
+                                        @endif
+                                    @endif
+                                    <form method="POST" action="{{ route('login') }}">
+                                        @csrf
+                                        <p>If you have an account, sign in with your email address.</p>
+                                        <div class="bigBajar-form-group form-group">
+                                            <label for="email" value="">{{ __('Email') }} <sup>*</sup></label>
+                                            <input type="email" name="email" class="control-form" value="{{ old('email') }} " placeholder="Enter email">
+                                        </div>
+                                        <div class="bigBajar-form-group form-group">
+                                            <label>Password <sup>*</sup></label>
+                                            <input type="password" name="password" class="control-form" placeholder="Enter password">
+                                        </div>										
+                                        <div >
+                                            <label for="remember_me">Remember me</label>
+                                            <input id="remember_me" style="width: 15%; height:0%" type="checkbox" name="remember" class="">
+                                        </div>										
+                                        <div class="bigBajar-form-group form-group submit-button">
+                                            @if (Route::has('password.request'))
+                                                <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('password.request') }}">
+                                                    {{ __('Forgot your password?') }}
+                                                </a>
+                                            @endif
+                                            <input type="submit" class="control-form" value="Login">
+                                        </div>
+                                    </form>							
+                                </div>
+                            </div>    
+                            <div class="col-12 col-md-6">
+                                <div class="customer-area contact-us-area">	
+                                    <h3>New Customers</h3>
+                                    <form action="#">
+                                        <p>Creating an account has many benefits: check out faster, keep more than one address, track orders and more.</p>									
+                                        <div class="primary-btn default-button">
+                                            <a href="{{ route('register') }}">Create an Account</a>
+                                        </div>
+                                    </form>							
+                                </div>
+                            </div>            		
+                        </div>
+                    </div>
+                </section>			
+                <!-- End Maincontent  -->
+    @endsection

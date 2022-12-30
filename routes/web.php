@@ -21,13 +21,12 @@ Route::get('/admin/dashboard', function () {
     return view('admin.dashboard');
 })->middleware('admin.auth:admin')->name('admin.dashboard');
 
+Route::get('/home', function () {
+    return view('public.welcome');
+})->name('home');
 Route::get('/', function () {
-    return view('welcome');
+    return view('public.welcome');
 });
-
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

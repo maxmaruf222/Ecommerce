@@ -21,6 +21,7 @@ class UserSeeder extends Seeder
             'name'=>'User',
             'email'=>'user@gmail.com',
             'password'=>Hash::make('password'),
+            'phone'=>'009988775544',
         ]);
     }
 }
