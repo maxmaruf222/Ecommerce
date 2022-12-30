@@ -34,6 +34,9 @@ Route::prefix('/admin')->name('admin.')->middleware('admin.guest:admin')->group(
 
     Route::post('reset-password', [AdminNewPasswordController::class, 'store'])
                 ->name('password.store');
+
+    
+
 });
 
 Route::prefix('/admin')->name('admin.')->middleware('admin.auth:admin')->group(function(){
@@ -57,6 +60,11 @@ Route::prefix('/admin')->name('admin.')->middleware('admin.auth:admin')->group(f
 
     Route::post('logout', [AdminAuthenticatedSessionController::class, 'destroy'])
         ->name('logout');
+});
+
+//admin item route
+Route::prefix('/admin')->name('admin.')->middleware('admin.auth:admin')->group(function(){
+        // Route::get('/name', function () { return view('admin.jack'); });
 });
 
 
